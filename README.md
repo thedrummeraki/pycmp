@@ -1,6 +1,7 @@
 # pycmp
 
 A Python implementation of Certificate Management Protocol (as known as CMP) data structures.
+The implementation of this project will follow [RFC #4210](https://www.ietf.org/rfc/rfc4210.txt).
 
 Here is a list of different data structures to be coverted. Any contrubition is welcome!
 
