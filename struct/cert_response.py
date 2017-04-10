@@ -10,9 +10,10 @@ from pki_status_info import PKIStatusInfo
 
 class CertResponse(Sequence):
 
-    def __init__(self, status, cert_req_id, resp_info=None):
+    def __init__(self, status, cert_req_id, resp_info=None, cert=None):
         Sequence.__init__(self, componentType=NamedTypes(
             NamedType('certReqId', Integer(cert_req_id)),
             NamedType('status', PKIStatusInfo(status)),
-            NamedType('rspInfo', OctetString(value=resp_info))
+            NamedType('rspInfo', OctetString(value=resp_info)),
+            NamedType('')
         ))
