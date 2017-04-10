@@ -46,6 +46,6 @@ Should some of the data structures defined above become unnecessary, they will b
 This is a very new project, and is therefore not useable. But please feel free to check it out and make changes as you see fit.
 
 Dependencies:
-- [pyOpenSSL] (http://www.pyopenssl.org/en/stable/)
-- [pyasn1] (http://pyasn1.sourceforge.net/)
+- [pyOpenSSL](http://www.pyopenssl.org/en/stable/)
+- [pyasn1](http://pyasn1.sourceforge.net/)
 
