@@ -4,6 +4,9 @@ from pyasn1.type.univ import Sequence
 from pyasn1.type.namedtype import OptionalNamedType
 from pyasn1.type.namedtype import NamedTypes
 
+from algorithm_identifier import AlgorithmIdentifier
+from utils import utils
+
 
 """
  EncryptedValue ::= SEQUENCE {
@@ -25,7 +28,7 @@ from pyasn1.type.namedtype import NamedTypes
 """
 
 class EncryptedValue(Sequence):
-	def __init__(self, enc_value, intended_alg=None, symm_alg=None, enc_symm_key=None, key_alg=None, value_hint=None)
+	def __init__(self, enc_value, intended_alg=None, symm_alg=None, enc_symm_key=None, key_alg=None, value_hint=None):
 		Sequence.__init__(self, componentType=NamedTypes(
 			OptionalNamedType('encValue', BitString(value=enc_value)),
 			OptionalNamedType('intentedAlg', AlgorithmIdentifier(value=intended_alg).subtype(implicitTag=utils.get_implicit_tag(0))),

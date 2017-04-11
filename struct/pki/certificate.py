@@ -3,7 +3,6 @@ from pyasn1.codec.der import encoder
 
 from OpenSSL import crypto
 
-import sys; sys.path.append("..")
 from asn1_struct import ASN1Sequence
 from utils.errors import PyCMPError
 
@@ -19,7 +18,6 @@ class Certificate(ASN1Sequence):
     def to_x509(self):
         enc = encoder.encode(self)
         return crypto.load_certificate(crypto.FILETYPE_ASN1, enc)
-
 
     @staticmethod
     def load_der_file(fop):
