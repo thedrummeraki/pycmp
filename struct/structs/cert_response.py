@@ -6,6 +6,7 @@ from pyasn1.type.namedtype import NamedTypes
 from pyasn1.type.univ import OctetString
 
 from pki_status_info import PKIStatusInfo
+from certified_key_pair import CertifiedKeyPair
 
 
 class CertResponse(Sequence):
