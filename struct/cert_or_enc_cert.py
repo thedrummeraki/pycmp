@@ -6,7 +6,7 @@ from pki.certificate import Certificate
 from utils import errors
 
 
-class CertorEncCert(Choice):
+class CertOrEncCert(Choice):
     def __init__(self, cert=None, enc_cert=None):
         if (enc_cert and cert) or (enc_cert and not cert):
             raise errors.PyCMPError('Encrypted certificates are not supported yet.')

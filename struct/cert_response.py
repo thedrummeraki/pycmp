@@ -15,5 +15,5 @@ class CertResponse(Sequence):
             NamedType('certReqId', Integer(cert_req_id)),
             NamedType('status', PKIStatusInfo(status)),
             NamedType('rspInfo', OctetString(value=resp_info)),
-            NamedType('')
+            NamedType('certifiedKeyPair', CertifiedKeyPair(value=cert))
         ))

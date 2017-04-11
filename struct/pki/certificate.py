@@ -1,10 +1,11 @@
-from struct.asn1_struct import ASN1Sequence
 from pyasn1.type.univ import Sequence
 from pyasn1.codec.der import encoder
 
 from OpenSSL import crypto
 
-from struct.utils.errors import PyCMPError
+import sys; sys.path.append("..")
+from asn1_struct import ASN1Sequence
+from utils.errors import PyCMPError
 
 
 class Certificate(ASN1Sequence):

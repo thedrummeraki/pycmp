@@ -43,7 +43,7 @@ Here is a list of different data structures to be coverted. Any contrubition is 
 - PollReqContent
 
 Should some of the data structures defined above become unnecessary, they will be removed accordingly.
-This is a very new project, and is therefore not useable. But please feel free to check it out and make changes as you see fit.
+*This is a very new project*, and is therefore *not useable*. But please feel free to check it out and make changes as you see fit.
 
 Dependencies:
 - [pyOpenSSL](http://www.pyopenssl.org/en/stable/)

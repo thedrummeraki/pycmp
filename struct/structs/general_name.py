@@ -5,6 +5,8 @@ from pyasn1.type.namedtype import OptionalNamedType
 
 from pyasn1.type import univ, namedtype, tag, char
 
+from utils import utils
+
 
 """
 GeneralName ::= CHOICE {
@@ -29,24 +31,17 @@ GeneralName ::= CHOICE {
  Name ::= CHOICE { RDNSequence }
 """
 
-def get_implicit_tag(position):
-    return tag.Tag(tag.tagClassContext, tag.tagFormatSimple, position)
 
-
-class GeneralName:
-    def __init__(self):
-        self._asn1_struct = Choice()
-        self._asn1_struct.componentType = NamedTypes(
-            OptionalNamedType('otherName', char.IA5String().subtype(implicitTag=get_implicit_tag(0))),
-            OptionalNamedType('rfc822Name', char.IA5String().subtype(implicitTag=get_implicit_tag(1))),
-            OptionalNamedType('ediPartyName', EDIPartyName().to_asn1_struct().subtype(implicitTag=get_implicit_tag(5))),
-            OptionalNamedType('uniformResourceIdentifier', char.IA5String().subtype(implicitTag=get_implicit_tag(6))),
-            OptionalNamedType('iPAddress', univ.OctetString().subtype(implicitTag=get_implicit_tag(7))),
-            OptionalNamedType('registeredID', univ.ObjectIdentifier().subtype(implicitTag=get_implicit_tag(8))),
-        )
-
-    def to_asn1_struct(self):
-        return self._asn1_struct
+class GeneralName(Choice):
+    def __init__(self, value):
+        Choice.__init__(self, componentType=NamedTypes(
+            OptionalNamedType('otherName', char.IA5String(value=value).subtype(implicitTag=utils.get_implicit_tag(0))),
+            OptionalNamedType('rfc822Name', char.IA5String(value=value).subtype(implicitTag=utils.get_implicit_tag(1))),
+            # OptionalNamedType('ediPartyName', EDIPartyName(value=value).subtype(implicitTag=utils.get_implicit_tag(5))),
+            OptionalNamedType('uniformResourceIdentifier', char.IA5String(value=value).subtype(implicitTag=utils.get_implicit_tag(6))),
+            OptionalNamedType('iPAddress', univ.OctetString(value=value).subtype(implicitTag=utils.get_implicit_tag(7))),
+            OptionalNamedType('registeredID', univ.ObjectIdentifier(value=value).subtype(implicitTag=utils.get_implicit_tag(8))),
+        ))
 
     def get_other_name(self):
         pass
@@ -90,12 +85,10 @@ class OtherName:
         pass
 
 
-class EDIPartyName:
-    def __init__(self):
-        self._asn1_struct = Sequence()
-
-    def to_asn1_struct(self):
-        return self._asn1_struct
+class EDIPartyName(Sequence):
+    def __init__(self, value):
+        Sequence.__init__(self, componentType=NamedTypes(
+        ))
 
     def get_party_name(self):
         pass

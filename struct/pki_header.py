@@ -1,4 +1,15 @@
+from pyasn1.type.univ import Sequence
+from pyasn1.type.univ import SequenceOf
+from pyasn1.type.univ import Integer
+from pyasn1.type.univ import OctetString
+from pyasn1.type.namedtype import NamedTypes
+from pyasn1.type.namedtype import NamedType
+from pyasn1.type.namedtype import OptionalNamedType
+from pyasn1.type.useful import GeneralizedTime
 
+from structs.general_name import GeneralName
+from structs.key_identifier import KeyIdentifier
+from pki_free_text import PKIFreeText
 
 """
 ASN1 Structure:
@@ -21,44 +32,21 @@ PKIHeader ::= SEQUENCE {
 """
 
 
-class PKIHeader():
-    def __init__(self, pvno, sender, recipient):
-        self._sender = sender
-        self._recipient = recipient
-        self._pvno = pvno
-
-    def get_pvno(self):
-        return self._pvno
-
-    def get_sender(self):
-        return self._sender
-
-    def get_recipient(self):
-        return self._recipient
-
-    def get_message_time(self):
-        pass
-
-    def get_protection_alg(self):
-        pass
-
-    def get_sender_kid(self):
-        pass
-
-    def get_recip_kid(self):
-        pass
-
-    def get_transaction_id(self):
-        pass
-
-    def get_sender_nonce(self):
-        pass
-
-    def get_recip_nonce(self):
-        pass
-
-    def get_free_text(self):
-        pass
-
-    def get_general_info(selfish):
-        pass
+class PKIHeader(Sequence):
+    def __init__(self, sender, recipient, pvno=2):
+        Sequence.__init__(self,
+            componentType=NamedTypes(
+                NamedType('pvno', Integer(pvno)),
+                NamedType('sender', GeneralName(sender)),
+                NamedType('recipient', GeneralName(recipient)),
+                OptionalNamedType('messageTime', GeneralizedTime()),
+                OptionalNamedType('protectionAlg', Integer()),
+                OptionalNamedType('senderKID', KeyIdentifier()),
+                OptionalNamedType('recipKID', KeyIdentifier()),
+                OptionalNamedType('transactionID', OctetString()),
+                OptionalNamedType('senderNonce', OctetString()),
+                OptionalNamedType('recipNonce', OctetString()),
+                OptionalNamedType('freeText', PKIFreeText()),
+                OptionalNamedType('generalInfo', SequenceOf())
+            )
+        )
